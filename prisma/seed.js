@@ -19,7 +19,7 @@ async function main() {
     const rol = await prisma.rol.upsert({
       where: { nombre },
       update: {},
-      create: { nombre }
+      create: { nombre, estado: true }
     });
     roles[nombre] = rol;
   }
@@ -39,7 +39,7 @@ async function main() {
     const c = await prisma.categoria.upsert({
       where: { nombre: cat.nombre },
       update: {},
-      create: { nombre: cat.nombre }
+      create: { nombre: cat.nombre, estado: true }
     });
     categorias[cat.nombre] = c;
   }
@@ -60,7 +60,7 @@ async function main() {
     const m = await prisma.mesa.upsert({
       where: { nombre: mesa.nombre },
       update: {},
-      create: { nombre: mesa.nombre, capacidad: mesa.capacidad }
+      create: { nombre: mesa.nombre, capacidad: mesa.capacidad, estado: true }
     });
     mesas.push(m);
   }

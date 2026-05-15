@@ -11,8 +11,8 @@ datasource db {
 
 model Rol {
   id      Int       @id @default(autoincrement())
-  nombre  String    @unique
-  estado  Boolean   @default(true)
+  nombre  String    @unique @map("name")
+  estado  Boolean   @default(true) @map("status")
   usuarios Usuario[]
 
   @@map("roles")
@@ -20,18 +20,18 @@ model Rol {
 
 model Categoria {
   id        Int       @id @default(autoincrement())
-  nombre    String    @unique
-  estado    Boolean   @default(true)
+  nombre    String    @unique @map("name")
+  estado    Boolean   @default(true) @map("status")
   productos Producto[]
 
-  @@map("categorias")
+  @@map("categories")
 }
 
 model Mesa {
   id        Int       @id @default(autoincrement())
-  nombre    String    @unique // ej. "Mesa 1 (Terraza)"
-  capacidad Int       @default(4)
-  estado    Boolean   @default(true) // true = disponible
+  nombre    String    @unique @map("name") // ej. "Mesa 1 (Terraza)"
+  capacidad Int       @default(4) @map("capacity")
+  estado    Boolean   @default(true) @map("status") // true = disponible
   ordenes   Orden[]
 
   @@map("mesas")
@@ -41,30 +41,30 @@ model Mesa {
 
 model Usuario {
   id       Int     @id @default(autoincrement())
-  nombre   String
-  email    String  @unique
-  password String
-  rol_id   Int
-  estado   Boolean @default(true)
-
+  nombre   String  @map("name")
+  email    String  @unique @map("email")
+  password String  @map("password")
+  rol_id   Int     @map("role_id")
+  estado   Boolean @default(true) @map("status")
+  
   rol     Rol     @relation(fields: [rol_id], references: [id])
   ordenes Orden[]
-
-  @@map("usuarios")
+  
+  @@map("users")
 }
 
 model Producto {
   id           Int     @id @default(autoincrement())
-  nombre       String
-  precio       Float
-  cantidad     Int     @default(0)
-  categoria_id Int
-  estado       Boolean @default(true)
-
+  nombre       String  @map("name")
+  precio       Float   @map("price")
+  cantidad     Int     @default(0) @map("quantity")
+  categoria_id Int     @map("category_id")
+  estado       Boolean @default(true) @map("status")
+  
   categoria   Categoria      @relation(fields: [categoria_id], references: [id])
   detalles    DetalleOrden[]
-
-  @@map("productos")
+  
+  @@map("products")
 }
 
 // nivel 3: Ordenes y transacciones
