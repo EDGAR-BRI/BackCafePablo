@@ -73,6 +73,12 @@ async function main() {
     { nombre: 'María Cajera', email: 'maria@cafe.com', password: 'cajero123', rol: 'Cajero' },
     { nombre: 'Juan Cocinero', email: 'juan@cafe.com', password: 'cocinero123', rol: 'Cocinero' },
     { nombre: 'Laura Gerente', email: 'laura@cafe.com', password: 'gerente123', rol: 'Gerente' },
+    // Usuarios Pablo
+    { nombre: 'Pablo Admin', email: 'admin.pablo36115@gmail.com', password: '123456', rol: 'Administrador' },
+    { nombre: 'Pablo Mesero', email: 'mesero.pablo36115@gmail.com', password: '123456', rol: 'Mesero' },
+    { nombre: 'Pablo Cajero', email: 'cajero.pablo36115@gmail.com', password: '123456', rol: 'Cajero' },
+    { nombre: 'Pablo Cocinero', email: 'cocinero.pablo36115@gmail.com', password: '123456', rol: 'Cocinero' },
+    { nombre: 'Pablo Gerente', email: 'gerente.pablo36115@gmail.com', password: '123456', rol: 'Gerente' },
   ];
   const usuarios = {};
   for (const u of usuariosData) {
@@ -147,19 +153,19 @@ async function main() {
   const ordenesData = [
     {
       mesa: 'Mesa 1 (Interior)',
-      usuario: 'Pedro Mesero',
+      usuario: 'Pablo Mesero',
       estado: 'pendiente',
       total: 24.50,
       notas: 'Café sin azúcar',
       detalles: [
         { producto: 'Café Latte', cantidad: 2, precio: 3.50 },
-        { producto: 'Tequeños (6u)', cantidad: 2, precio: 2.50 }, // Cambiado de Croissant a Tequeños
+        { producto: 'Tequeños (6u)', cantidad: 2, precio: 2.50 },
         { producto: 'Pastel de Chocolate', cantidad: 1, precio: 4.50 },
       ]
     },
     {
       mesa: 'Mesa 3 (Interior)',
-      usuario: 'Pedro Mesero',
+      usuario: 'Pablo Mesero',
       estado: 'pendiente',
       total: 45.00,
       notas: 'Sin cebolla en sandwich',
@@ -172,7 +178,7 @@ async function main() {
     },
     {
       mesa: 'Mesa 4 (Terraza)',
-      usuario: 'Pedro Mesero',
+      usuario: 'Pablo Mesero',
       estado: 'pagada',
       total: 18.00,
       notas: '',
@@ -184,7 +190,7 @@ async function main() {
     },
     {
       mesa: 'Mesa 5 (Terraza)',
-      usuario: 'Pedro Mesero',
+      usuario: 'Pablo Mesero',
       estado: 'pendiente',
       total: 12.00,
       notas: 'Combo para llevar',

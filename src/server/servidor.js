@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import prisma from '../config/prisma.config.js';
 
 // Rutas
+import authRoutes from '../routes/auth.rutas.js';
 import rolesRoutes from '../routes/roles.rutas.js';
 import productosRoutes from '../routes/productos.rutas.js';
 import categoriasRoutes from '../routes/categorias.rutas.js';
@@ -27,6 +28,7 @@ export class Servidor {
     this.midelware();
 
     this.rutas = {
+      auth: `${this.pre}/auth`,
       roles: `${this.pre}/roles`,
       usuarios: `${this.pre}/usuarios`,
       categorias: `${this.pre}/categorias`,
@@ -53,6 +55,7 @@ export class Servidor {
       });
     });
 
+    this.app.use(this.rutas.auth, authRoutes);
     this.app.use(this.rutas.roles, rolesRoutes);
     this.app.use(this.rutas.productos, productosRoutes);
     this.app.use(this.rutas.categorias, categoriasRoutes);
