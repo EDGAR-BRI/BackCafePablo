@@ -1,0 +1,48 @@
+{
+  "name": "api15112025",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
+    "prisma:seed": "npx prisma db seed",
+    "db:reset": "prisma migrate reset",
+    "db:reset:seed": "npx prisma migrate reset --force && npx prisma db push && npx prisma generate && npx prisma db seed"
+
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "5.22.0",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-validator": "^7.3.1",
+    "pg": "^8.16.3"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Edgarbri26/api_foc_4tosemestre.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Edgarbri26/api_foc_4tosemestre/issues"
+  },
+  "homepage": "https://github.com/Edgarbri26/api_foc_4tosemestre#readme",
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/pg": "^8.15.6",
+    "nodemon": "^3.1.11",
+    "prisma": "5.22.0"
+  }
+}

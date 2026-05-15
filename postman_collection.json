@@ -1,0 +1,378 @@
+{
+  "info": {
+    "name": "API Cafe Restaurant",
+    "description": "Colección de rutas del backend del restaurant cafe",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3800/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Servidor",
+      "item": [
+        {
+          "name": "Verificar servidor",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "Obtener todos los usuarios",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/usuarios"
+          }
+        },
+        {
+          "name": "Obtener un usuario",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/usuarios/:id"
+          }
+        },
+        {
+          "name": "Crear usuario",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/usuarios",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"\",\n  \"email\": \"\",\n  \"password\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar usuario",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/usuarios/:id",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"\",\n  \"email\": \"\",\n  \"password\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar usuario",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/usuarios/:id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Roles",
+      "item": [
+        {
+          "name": "Obtener todos los roles",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/roles"
+          }
+        },
+        {
+          "name": "Obtener un rol",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/roles/:id"
+          }
+        },
+        {
+          "name": "Crear rol",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/roles",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar rol",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/roles/:id",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar rol",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/roles/:id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categorías",
+      "item": [
+        {
+          "name": "Obtener todas las categorías",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/categorias"
+          }
+        },
+        {
+          "name": "Obtener una categoría",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/categorias/:id"
+          }
+        },
+        {
+          "name": "Crear categoría",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/categorias",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar categoría",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/categorias/:id",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar categoría",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/categorias/:id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Productos",
+      "item": [
+        {
+          "name": "Obtener todos los productos",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/productos"
+          }
+        },
+        {
+          "name": "Obtener un producto",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/productos/:id"
+          }
+        },
+        {
+          "name": "Crear producto",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"\",\n  \"precio\": 0,\n  \"categoriaId\": 0\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar producto",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/productos/:id",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"\",\n  \"precio\": 0,\n  \"categoriaId\": 0\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar producto",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/productos/:id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mesas",
+      "item": [
+        {
+          "name": "Obtener todas las mesas",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/mesas"
+          }
+        },
+        {
+          "name": "Obtener una mesa",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/mesas/:id"
+          }
+        },
+        {
+          "name": "Crear mesa",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/mesas",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numero\": 0,\n  \"capacidad\": 0\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar mesa",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/mesas/:id",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numero\": 0,\n  \"capacidad\": 0\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar mesa",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/mesas/:id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Órdenes",
+      "item": [
+        {
+          "name": "Obtener todas las órdenes",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ordenes"
+          }
+        },
+        {
+          "name": "Crear orden",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ordenes",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mesaId\": 0,\n  \"productos\": []\n}"
+            }
+          }
+        },
+        {
+          "name": "Pagar orden",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/ordenes/:id/pagar"
+          }
+        },
+        {
+          "name": "Eliminar orden",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/ordenes/:id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contabilidad",
+      "item": [
+        {
+          "name": "Obtener cuentas contables",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contabilidad/cuentas-contables"
+          }
+        },
+        {
+          "name": "Crear cuenta contable",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/contabilidad/cuentas-contables",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"\",\n  \"nombre\": \"\",\n  \"tipo\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Obtener asientos",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contabilidad/asientos"
+          }
+        },
+        {
+          "name": "Obtener asiento por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contabilidad/asientos/:id"
+          }
+        },
+        {
+          "name": "Crear asiento",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/contabilidad/asientos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fecha\": \"\",\n  \"descripcion\": \"\",\n  \"detalle\": []\n}"
+            }
+          }
+        },
+        {
+          "name": "Obtener caja",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contabilidad/caja"
+          }
+        },
+        {
+          "name": "Registrar caja",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/contabilidad/caja",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipo\": \"\",\n  \"monto\": 0,\n  \"descripcion\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Obtener reporte de ventas",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contabilidad/reportes/ventas"
+          }
+        }
+      ]
+    }
+  ]
+}

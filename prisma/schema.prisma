@@ -1,0 +1,170 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// nivel 1
+
+model Rol {
+  id      Int       @id @default(autoincrement())
+  nombre  String    @unique
+  estado  Boolean   @default(true)
+  usuarios Usuario[]
+
+  @@map("roles")
+}
+
+model Categoria {
+  id        Int       @id @default(autoincrement())
+  nombre    String    @unique
+  estado    Boolean   @default(true)
+  productos Producto[]
+
+  @@map("categorias")
+}
+
+model Mesa {
+  id        Int       @id @default(autoincrement())
+  nombre    String    @unique // ej. "Mesa 1 (Terraza)"
+  capacidad Int       @default(4)
+  estado    Boolean   @default(true) // true = disponible
+  ordenes   Orden[]
+
+  @@map("mesas")
+}
+
+// nivel 2
+
+model Usuario {
+  id       Int     @id @default(autoincrement())
+  nombre   String
+  email    String  @unique
+  password String
+  rol_id   Int
+  estado   Boolean @default(true)
+
+  rol     Rol     @relation(fields: [rol_id], references: [id])
+  ordenes Orden[]
+
+  @@map("usuarios")
+}
+
+model Producto {
+  id           Int     @id @default(autoincrement())
+  nombre       String
+  precio       Float
+  cantidad     Int     @default(0)
+  categoria_id Int
+  estado       Boolean @default(true)
+
+  categoria   Categoria      @relation(fields: [categoria_id], references: [id])
+  detalles    DetalleOrden[]
+
+  @@map("productos")
+}
+
+// nivel 3: Ordenes y transacciones
+
+model Orden {
+  id         Int      @id @default(autoincrement())
+  mesa_id    Int
+  usuario_id Int      // El mesero que tomó la orden
+  estado     String   @default("pendiente") // pendiente, pagada, cancelada
+  total      Float    @default(0)
+  notas      String?  // Instrucciones especiales
+  creado_en  DateTime @default(now())
+  actualizado_en DateTime @updatedAt
+
+  mesa      Mesa           @relation(fields: [mesa_id], references: [id])
+  usuario   Usuario        @relation(fields: [usuario_id], references: [id])
+  detalles  DetalleOrden[]
+  pagos     Pago[]
+
+  @@map("ordenes")
+}
+
+model DetalleOrden {
+  id          Int     @id @default(autoincrement())
+  orden_id    Int
+  producto_id Int
+  cantidad    Int
+  precio      Float   // Precio en el momento de la orden
+  notas       String?
+
+  orden    Orden    @relation(fields: [orden_id], references: [id], onDelete: Cascade)
+  producto Producto @relation(fields: [producto_id], references: [id])
+
+  @@map("detalles_orden")
+}
+
+model Pago {
+  id               Int      @id @default(autoincrement())
+  orden_id         Int
+  metodo           String   // ej: 'efectivo', 'punto', 'pago_movil'
+  monto_entregado  Float
+  total            Float
+  cambio           Float    @default(0)
+  referencia       String?  // para pagos con tarjeta/móvil
+  split_id         String?  // para agrupar pagos de una misma orden
+  creado_en        DateTime @default(now())
+
+  orden Orden @relation(fields: [orden_id], references: [id], onDelete: Cascade)
+
+  @@map("pagos")
+}
+
+// ============ CONTABILIDAD ============
+
+model CuentaContable {
+  id          Int     @id @default(autoincrement())
+  codigo      String  @unique // ej: "1.01.01"
+  nombre      String
+  tipo        String  // A (Activo), P (Pasivo), Pat (Patrimonio), I (Ingreso), C (Costo), G (Gasto)
+  naturaleza  String  // deudora, acredora
+
+  detalles    DetalleAsiento[]
+
+  @@map("cuentas_contables")
+}
+
+model Asiento {
+  id          Int      @id @default(autoincrement())
+  fecha       DateTime @default(now())
+  concepto    String
+  origen      String   // orden_pago, gasto, cierre_caja, etc.
+  origen_id   String?  // ID del registro origen (ej: orden_id)
+
+  detalles    DetalleAsiento[]
+
+  @@map("asientos")
+}
+
+model DetalleAsiento {
+  id          Int     @id @default(autoincrement())
+  asiento_id  Int
+  cuenta_id   Int
+  debe        Float   @default(0)
+  haber       Float   @default(0)
+
+  asiento     Asiento       @relation(fields: [asiento_id], references: [id], onDelete: Cascade)
+  cuenta      CuentaContable @relation(fields: [cuenta_id], references: [id])
+
+  @@map("detalles_asiento")
+}
+
+model Caja {
+  id          Int      @id @default(autoincrement())
+  fecha       DateTime @default(now())
+  tipo        String   // ingreso, egreso
+  monto       Float
+  concepto    String
+  saldo       Float    // saldo después de esta operación
+  origen      String   // orden_pago, gasto, cierre_caja
+  origen_id   String?
+
+  @@map("cajas")
+}

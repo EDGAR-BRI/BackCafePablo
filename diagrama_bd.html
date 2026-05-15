@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Modelo Entidad-Relación (Restaurante)</title>
+    <style>
+        body { margin: 0; padding: 20px; font-family: sans-serif; background-color: #f4f6f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .mermaid { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 1200px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="mermaid">
+        erDiagram
+            Rol ||--o{ Usuario : "tiene"
+            Categoria ||--o{ Producto : "clasifica"
+            Mesa ||--o{ Orden : "registra"
+            Usuario ||--o{ Orden : "toma_orden"
+            Orden ||--|{ DetalleOrden : "contiene"
+            Producto ||--o{ DetalleOrden : "incluido_en"
+            Orden ||--o{ Pago : "recibe"
+
+            Rol {
+                Int id PK
+                String nombre
+                Boolean estado
+            }
+
+            Categoria {
+                Int id PK
+                String nombre
+                Boolean estado
+            }
+
+            Mesa {
+                Int id PK
+                String nombre
+                Int capacidad
+                Boolean estado
+            }
+
+            Usuario {
+                Int id PK
+                String nombre
+                String email
+                String password
+                Int rol_id FK
+            }
+
+            Producto {
+                Int id PK
+                String nombre
+                Float precio
+                Int cantidad
+                Int categoria_id FK
+            }
+
+            Orden {
+                Int id PK
+                Int mesa_id FK
+                Int usuario_id FK
+                String estado
+                Float total
+                String notas
+            }
+
+            DetalleOrden {
+                Int id PK
+                Int orden_id FK
+                Int producto_id FK
+                Int cantidad
+                Float precio
+            }
+
+            Pago {
+                Int id PK
+                Int orden_id FK
+                String metodo
+                Float total
+            }
+    </div>
+
+    <!-- Script oficial de Mermaid para renderizar en la web automáticamente -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</body>
+</html>
